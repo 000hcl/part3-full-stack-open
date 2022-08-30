@@ -1,0 +1,27 @@
+{
+  "name": "phonebook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/000hcl/part3-full-stack-open.git"
+  },
+  "author": "Natalie Johansson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/000hcl/part3-full-stack-open/issues"
+  },
+  "homepage": "https://github.com/000hcl/part3-full-stack-open#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
