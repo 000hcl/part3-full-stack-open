@@ -1,0 +1,34 @@
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "",
+    "number": "12345"
+}
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "John",
+    "number": ""
+}
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Ada Lovelace",
+    "number": "12345"
+}
+
+###
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Mary PoppendiecK",
+    "number": "12345"
+}
