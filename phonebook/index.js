@@ -35,7 +35,9 @@ app.get('/api/persons', (request, response) => {
 })
 
 app.get('/info', (request, response) => {
-    response.send('Info')
+    const date = new Date();
+    message = `Phonebook has info for ${persons.length} people <br> ${date}`
+    response.send(message)
 })
 
 const PORT = 3001
