@@ -2,7 +2,7 @@ const { response } = require('express')
 const express = require('express')
 const app = express()
 var morgan = require('morgan')
-
+const cors = require('cors')
 
 
 app.use(express.json())
@@ -13,6 +13,10 @@ morgan.token('postdata', (request)=>{
   )
 })
 
+
+
+app.use(cors())
+app.use(express.static('build'))
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :postdata'))
 
 
@@ -71,7 +75,7 @@ app.post('/api/persons', (request, response) =>{
   const id = Math.floor(Math.random() * 99999)
   const person = request.body
   person.id = id
-  persons = persons.concat(person)
+  
 
   if (!person.name){
     return response.status(400).json({ 
@@ -82,10 +86,12 @@ app.post('/api/persons', (request, response) =>{
       error: 'number missing' 
     })
   } else if (persons.some(p=>p.name===person.name)){
+
     return response.status(400).json({ 
       error: 'name must be unique' 
     })
   }else {
+    persons = persons.concat(person)
     response.json(person)
   }
 
@@ -98,8 +104,7 @@ app.get('/info', (request, response) => {
     response.send(message)
 })
 
-const PORT = 3001
-
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+  console.log(`Server running on port ${PORT}`)
 })
