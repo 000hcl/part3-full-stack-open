@@ -21,7 +21,7 @@ Content-Type: application/json
 
 {
     "name": "Ada Lovelace",
-    "number": "12345"
+    "number": "123-45"
 }
 
 ###
@@ -29,6 +29,6 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-    "name": "Mary PoppendiecK",
-    "number": "12345"
+    "name": "Ada Lovelace",
+    "number": "123-47999999"
 }

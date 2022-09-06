@@ -73,7 +73,7 @@ app.put('/api/persons/:id', (request, response, next) => {
 })
 
 
-app.post('/api/persons', (request, response) =>{
+app.post('/api/persons', (request, response, next) =>{
   const body = request.body
 
   const person = new Person({
@@ -81,20 +81,32 @@ app.post('/api/persons', (request, response) =>{
     number: body.number
   })
 
-  if (!person.name){
-    return response.status(400).json({ 
-      error: 'name missing' 
-    })
-  } else if (!person.number){
-    return response.status(400).json({ 
-      error: 'number missing' 
-    })
-  }else {
-    console.log('added-----------');
-    person.save().then(savedPerson => {
-      response.json(savedPerson)
-    })
-  }
+  Person.findOne({ name: body.name})
+  .then(p => {
+    if (p) {
+      return response.status(400).json({
+        error: 'person is already in phonebook'
+      })
+    } else {
+      if (!person.name){
+        return response.status(400).json({ 
+          error: 'name missing' 
+        })
+      } else if (!person.number){
+        return response.status(400).json({ 
+          error: 'number missing' 
+        })
+      }else {
+        person.save().then(savedPerson => {
+          response.json(savedPerson)
+        })
+        .catch(error => next(error))
+      }
+    }
+  })
+  
+
+
 
 })
 
@@ -130,7 +142,9 @@ const errorHandler = (error, request, response, next) => {
   
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
-  } 
+  } else if (error.name === 'ValidationError'){
+    return response.status(400).json({ error: error.message })
+  }
 
   next(error)
 }
